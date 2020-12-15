@@ -30,7 +30,7 @@ class SignUp extends React.Component {
         })
         .then((response) => (response.json()))
         .then((info) => {
-            if(info.status === 'succeed') {
+            if(info.status === 'success') {
                 console.log('sign up succeed');
                 window.location.replace('/login');
             }
