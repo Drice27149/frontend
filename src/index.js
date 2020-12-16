@@ -2,11 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
-import Home from './home.js';
-import Login from './login.js';
-import SignUp from './signup.js';
-
-import './index.css';
+import { App } from './app.js';
+import { Login } from './login.js';
+import { SignUp } from './signup.js';
 
 class Routes extends React.Component {
     render() {
@@ -20,8 +18,8 @@ class Routes extends React.Component {
                   <Route path="/signup">
                     <SignUp />
                   </Route>
-                  <Route path="/home">
-                    <Home />
+                  <Route path="/">
+                    <App />
                   </Route>
                 </Switch>
               </div>

@@ -1,8 +1,8 @@
 import React from 'react';
 
-const url = 'http://localhost:8012';
+const url = 'http://159.75.1.231:5005';
 
-class SignUp extends React.Component {
+export class SignUp extends React.Component {
     constructor(props) {
         super(props);
         this.state = {username: '',
@@ -21,7 +21,7 @@ class SignUp extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        fetch(url + '/signup', {
+        fetch(url + '/users/signup', {
             method: 'POST',
             body: JSON.stringify({
                 username: this.state.username,
@@ -64,5 +64,3 @@ class SignUp extends React.Component {
     );
   }
 }
-
-export default SignUp;
