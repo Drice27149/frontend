@@ -18,10 +18,11 @@ export class LargeUser extends React.Component {
     }
     
     render() {
+        const avatarurl = url+'/'+this.props.data.avatar;
         return (
             <div className='LargeUser'>
                 <div>username:{this.props.data.username}</div>
-                <img src={this.props.data.Avatar} alt='Avatar'/>
+                <img src={avatarurl} alt='Avatar'/>
                 <div>bio:{this.props.data.bio}</div>
                 <div onClick={() => {this.handleClickFollowing()}}>{this.props.data.followingNum} following </div>
                 <div onClick={() => {this.handleClickFollwers()}}>{this.props.data.followerNum} followers </div>
@@ -32,10 +33,11 @@ export class LargeUser extends React.Component {
 
 export class MedUser extends React.Component {
     render() {
+        const avatarurl = url+'/'+this.props.data.avatar;
         return (
             <div className='MedUser'>
                 <div>username:{this.props.data.username}</div>
-                <img src={this.props.data.Avatar} alt='Avatar'/>
+                <img src={avatarurl} alt='Avatar'/>
                 <div>bio:{this.props.data.bio}</div>
             </div>
         );
@@ -50,13 +52,14 @@ export class SmallUser extends React.Component {
     }
     
     render() {
+        const avatarurl = url+'/'+this.props.data.avatar;
         return (
             <div className='SmallUser' onClick={(event) => {
                 event.stopPropagation();
                 this.handleClick();
             }}>
                 <div>username:{this.props.data.username}</div>
-                <img src={this.props.data.Avatar} alt='Avatar'/>
+                <img src={avatarurl} alt='Avatar'/>
             </div>
         );
     }
@@ -104,6 +107,7 @@ export class Followers extends React.Component {
         if(this.state.users!=null){
             return (
                 <div>
+                  Followers
                   <Users data={this.state.users} />
                 </div>
             );
@@ -148,6 +152,7 @@ export class Following extends React.Component {
         if(this.state.users!=null){
             return (
                 <div>
+                  Following
                   <Users data={this.state.users} />
                 </div>
             );

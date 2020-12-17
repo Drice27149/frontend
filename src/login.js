@@ -47,27 +47,27 @@ export class Login extends React.Component {
 
   render() {
     return (
-    <>
+      <div>
         <div>login</div>
         <form onSubmit={(event) => this.handleSubmit(event)}>
         <label>
-            <div>
-                name:
-                <input type="text" value={this.state.username} onChange={(event) => this.handleUsernameChange(event)} />
-            </div>
-            <div>
-                password:
-                <input type="text" value={this.state.password} onChange={(event) => this.handlePasswordChange(event)} />
-            </div>
+          <div>
+            name:
+              <input type="text" value={this.state.username} onChange={(event) => this.handleUsernameChange(event)} />
+          </div>
+          <div>
+            password:
+            <input type="text" value={this.state.password} onChange={(event) => this.handlePasswordChange(event)} />
+          </div>
         </label>
         <input type="submit" value="submit" />
         </form>
         <div>
-            <button onClick = {() => { window.location.replace('/signup') }}>
-                signup
-            </button>
+          <button onClick = {() => { window.location.replace('/signup') }}>
+            signup
+          </button>
         </div>
-    </>
+      </div>
     )
   }
 }

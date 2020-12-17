@@ -3,3 +3,8 @@
   border-color:grey;
   margin: 1%;
 }
+
+.ImageBlock img{
+  width: 100px;
+  height: 100px;
+}

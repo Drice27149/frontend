@@ -50,6 +50,19 @@ export class UserContents extends React.Component {
     }
 }
 
+// data: [(short)url]
+export class ImageBlock extends React.Component {
+    render() {
+        const imagelist = this.props.data.map((imgurl) => <img src={url+'/'+imgurl} />);
+        return (
+          <div className='ImageBlock'>
+          Images:
+            {imagelist}
+          </div>
+        );
+    }
+}
+
 // data: content, can be undefined
 export class Status extends React.Component {
     constructor(props) {
@@ -134,6 +147,7 @@ export class Content extends React.Component {
               <div>title: {this.props.data.title} </div>
               <div>text: {this.props.data.text} </div>
               <br></br>
+              <ImageBlock data={this.props.data.images} />
             </div>
         );
     }

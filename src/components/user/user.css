@@ -16,20 +16,20 @@
   margin: 1%;
 }
 
-.img LargeUser {
+.LargeUser img {
   height: 100px;
   width: 100px;
   border-radius: 50%;
 }
 
-.img MedUser {
-  height: 100px;
-  width: 100px;
+.MedUser img {
+  height: 66px;
+  width: 66px;
   border-radius: 50%;
 }
 
-.img SmallUser {
-  height: 100px;
-  width: 100px;
+.SmallUser img {
+  height: 44px;
+  width: 44px;
   border-radius: 50%;
 }
