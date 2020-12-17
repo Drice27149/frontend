@@ -34,7 +34,7 @@ export class Login extends React.Component {
                 window.localStorage['token'] = info.token;
                 console.log('login succeed');
                 console.log('token: ' + info.token);
-                window.location.replace('/home')
+                window.location.replace('/')
             }
             else {
                 console.log('login failed');

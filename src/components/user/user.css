@@ -1,4 +1,34 @@
-.Avatar {
+.LargeUser {
+  border-style:solid;
+  border-color:grey;
+  margin: 1%;
+}
+
+.MedUser {
+  border-style:solid;
+  border-color:grey;
+  margin: 1%;
+}
+
+.SmallUser {
+  border-style:solid;
+  border-color:grey;
+  margin: 1%;
+}
+
+.img LargeUser {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+}
+
+.img MedUser {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+}
+
+.img SmallUser {
   height: 100px;
   width: 100px;
   border-radius: 50%;
