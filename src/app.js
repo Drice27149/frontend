@@ -10,7 +10,8 @@ import { Home } from './home.js';
 import { Profile } from './profile.js';
 import { Status } from './components/content/content.js';
 
-const url = 'http://159.75.1.231:5005';
+// export const url = 'http://localhost:5005';
+export const url = 'http://159.75.1.231:5005';
 
 export class App extends React.Component {
     

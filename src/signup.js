@@ -1,6 +1,6 @@
 import React from 'react';
 
-const url = 'http://159.75.1.231:5005';
+import { url } from './app.js';
 
 export class SignUp extends React.Component {
     constructor(props) {

@@ -2,7 +2,7 @@ import React from 'react';
 
 import './css/home.css';
 
-const url = 'http://159.75.1.231:5005';
+import { url } from './app.js';
 
 export class Home extends React.Component {
     handleLogOut() {
@@ -107,7 +107,7 @@ class PostContent extends React.Component {
     render() {
         return (
           <div className='PostContent'>
-            <div>Post</div>
+            <div>Post Content</div>
             <form onSubmit={(event) => {
                 event.preventDefault();
                 this.handleSubmit()

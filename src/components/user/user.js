@@ -2,7 +2,7 @@ import React from 'react';
 
 import './user.css';
 
-const url = 'http://159.75.1.231:5005';
+import { url } from '../../app.js';
 
 // data: user
 export class LargeUser extends React.Component {

@@ -10,7 +10,7 @@ import {
 import {LargeUser, Following, Followers} from './components/user/user.js';
 import {UserContents} from './components/content/content.js';
 
-const url = 'http://159.75.1.231:5005';
+import { url } from './app.js';
 
 // data: null
 export class Profile extends React.Component {

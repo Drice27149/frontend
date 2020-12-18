@@ -1,11 +1,11 @@
 import React from 'react';
 
 import {LargeUser, MedUser, SmallUser} from '../user/user.js';
-import { Comments } from '../comment/comment.js';
+import { Comments, PostComment } from '../comment/comment.js';
 
 import './content.css';
 
-const url = 'http://159.75.1.231:5005';
+import { url } from '../../app.js';
 
 // data: username
 export class UserContents extends React.Component {
@@ -53,7 +53,7 @@ export class UserContents extends React.Component {
 // data: [(short)url]
 export class ImageBlock extends React.Component {
     render() {
-        const imagelist = this.props.data.map((imgurl) => <img src={url+'/'+imgurl} />);
+        const imagelist = this.props.data.map((imgurl, key) => <img src={url+'/'+imgurl} key={key} />);
         return (
           <div className='ImageBlock'>
           Images:
@@ -99,6 +99,7 @@ export class Status extends React.Component {
             return (
               <div>
                 <Content data={this.state.content} />
+                <PostComment data={this.state.content.contentID}/>
                   <div>
                     Comments
                   </div>

@@ -4,7 +4,72 @@ import { SmallUser } from '../user/user.js';
 
 import './comment.css'
 
-const url = 'http://159.75.1.231:5005';
+import { url } from '../../app.js';
+
+// data: contentID
+export class PostComment extends React.Component {
+    constructor(props) {
+        super(props);
+        
+        this.state = {
+            text: ""
+        };
+    }
+    
+    handleSubmit() {
+        const token = window.localStorage['token'];
+        if(token != undefined && token != null) {
+            fetch(url + '/comments', {
+                method: 'POST',
+                headers: {
+                    'Authorization': token
+                }, 
+                body: JSON.stringify({
+                    contentID: this.props.data, 
+                    text: this.state.text
+                })
+            })
+            .then((response) => (response.json()))
+            .then((info) => {
+                if(info.status === 'success') {
+                    console.log('post comment succeed');
+                }
+                else {
+                    console.log('post comment');
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        }
+    }
+    
+    handleTextChange(event) {
+        this.setState({
+           text: event.target.value 
+        });
+    }
+    
+    render() {
+        return (
+          <div>
+            Post Comment
+            <form onSubmit={(event) => {
+                // event.preventDefault();
+                this.handleSubmit()
+            }}>
+            <label>
+              <div>
+                text
+                <input type="text" value={this.state.text} onChange={(event) => this.handleTextChange(event)} />
+              </div>
+            </label>
+            <input type="submit" value="submit" />
+            </form>
+          </div>
+        );
+    }
+}
 
 // data: [contentID]
 export class Comments extends React.Component {
