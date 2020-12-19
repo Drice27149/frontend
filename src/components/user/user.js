@@ -25,24 +25,30 @@ export class LargeUser extends React.Component {
         })
         .then((response) => (response.json()))
         .then((info) => {
+            console.log('hey');
             console.log(info);
-            if(info.status=='Mutually following' || info.status=='following'){
-                this.setState({
-                    user: this.state.user,
-                    following: true
-                });
+            const result = info.status;
+            if(result!=undefined){
+                if(info.status=='Mutually following' || info.status=='following'){
+                    this.setState({
+                        user: this.state.user,
+                        following: true
+                    });
+                }
+                else{
+                    this.setState({
+                        user: this.state.user,
+                        following: false
+                    });
+                }
             }
             else{
-                this.setState({
-                    user: this.state.user,
-                    following: false
-                });
+                const newState = this.state;
+                newState.following = undefined;
+                this.setState(newState);
             }
         })
         .catch((error) => {
-            this.setState({
-                following: undefined
-            });
             console.log(error);
         });
         
