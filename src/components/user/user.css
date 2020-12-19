@@ -1,18 +1,21 @@
 .LargeUser {
   border-style:solid;
   border-color:grey;
+  border-width: 1px;
   margin: 1%;
 }
 
 .MedUser {
   border-style:solid;
   border-color:grey;
+  border-width: 1px;
   margin: 1%;
 }
 
 .SmallUser {
   border-style:solid;
   border-color:grey;
+  border-width: 1px;
   margin: 1%;
 }
 

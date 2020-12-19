@@ -10,6 +10,8 @@ import { Home } from './home.js';
 import { Profile } from './profile.js';
 import { Status } from './components/content/content.js';
 
+import './css/app.css';
+
 // export const url = 'http://localhost:5005';
 export const url = 'http://159.75.1.231:5005';
 
@@ -57,11 +59,11 @@ export class App extends React.Component {
         if(this.state.username!=null){
             return (
                 <Router>
-                  <div>
+                  <div className='SideBar'>
                     <div onClick={() => {this.handleClickHome()}}>Home</div>
                     <div onClick={() => {this.handleClickProfile()}}>Profile</div>
-                    <hr />
-                    
+                  </div>
+                  <div className='DashBoard'>
                     <Switch>
                       <Route exact path="/">
                         <Home />
@@ -76,7 +78,10 @@ export class App extends React.Component {
         else{
             return (
                 <div>
-                  loading
+                  Please login
+                  <button onClick={() => {window.location.replace('/login')}}>
+                    Login
+                  </button>
                 </div>
             )
         }

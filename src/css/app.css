@@ -1,0 +1,28 @@
+.SideBar {
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: 160px; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  top: 0; /* Stay at the top */
+  left: 0;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 20px;
+  border-style:solid;
+  border-color:black;
+  border-width: 1px;
+  margin: 1%;
+}
+
+.SideBar div{
+  margin: 0 auto;
+  padding: 1%;
+  width: 50px;
+}
+
+.DashBoard {
+  margin-left: 160px; /* Same as the width of the sidenav */
+  padding: 0px 10px;
+}
+
+.Modal {
+  z-index: 2;
+}
