@@ -2,10 +2,28 @@
   border-style:solid;
   border-color:grey;
   border-width: 1px;
-  margin: 1%;
+  margin-left: 2%;
+  margin-top: 3%;
+  padding: 1%;
 }
 
 .ImageBlock img{
   width: 100px;
   height: 100px;
+}
+
+.Status {
+  border-style:solid;
+  border-color:grey;
+  border-width: 1px;
+  margin: 1%;
+  padding: 1%;
+}
+
+.DeleteButton {
+  margin-left: 95%;
+}
+
+.RightPart {
+  margin: 1%;
 }

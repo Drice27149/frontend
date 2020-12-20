@@ -119,7 +119,7 @@ export class LargeUser extends React.Component {
             }
             return (
                 <div className='LargeUser'>
-                    <div>username:{this.props.data.username}</div>
+                    <div>{this.props.data.username}</div>
                     <img src={avatarurl} alt='Avatar'/>
                     <div>bio:{this.props.data.bio}</div>
                     {followButton}
@@ -141,7 +141,7 @@ export class MedUser extends React.Component {
         const avatarurl = url+'/'+this.props.data.avatar;
         return (
             <div className='MedUser'>
-                <div>username:{this.props.data.username}</div>
+                <div>{this.props.data.username}</div>
                 <img src={avatarurl} alt='Avatar'/>
                 <div>bio:{this.props.data.bio}</div>
             </div>
@@ -163,7 +163,7 @@ export class SmallUser extends React.Component {
                 event.stopPropagation();
                 this.handleClick();
             }}>
-                <div>username:{this.props.data.username}</div>
+                <div>{this.props.data.username}</div>
                 <img src={avatarurl} alt='Avatar'/>
             </div>
         );

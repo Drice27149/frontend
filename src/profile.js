@@ -88,7 +88,7 @@ export class Profile extends React.Component {
             }
             return (
               <Router>
-                  <div>
+                  <div className='RightPart'>
                     <div>User Profile</div>
                     {EditProfileButton}
                     <LargeUser data={this.state.user} />

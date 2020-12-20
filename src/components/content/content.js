@@ -166,21 +166,35 @@ export class ImageBlock extends React.Component {
         const imagelist = this.props.data.map((imgurl, key) => <img src={url+'/'+imgurl} key={key} />);
         return (
           <div className='ImageBlock'>
-          Images:
             {imagelist}
           </div>
         );
     }
 }
 
-// data: content, can be undefined
+// data: [(short)url]
+export class StatusImages extends React.Component {
+    render() {
+        return (
+          <div>
+            <div>Images:</div>
+            <ImageBlock data={this.props.data} />
+          </div>
+        );
+    }
+}
+
+// data: contentID, can be undefined
 export class Status extends React.Component {
     constructor(props) {
         super(props);
         
         this.state = {
+            historyID: null,
+            authUser: null, 
             content: null,
-            openModal: false
+            openModal: false,
+            openDelete: false,
         };
         
         if(this.props.data==undefined || this.props.data==null) {
@@ -200,6 +214,26 @@ export class Status extends React.Component {
         this.setState(newState);
     }
 
+    handleDelete() {
+        const token = window.localStorage['token'];
+        fetch(url + '/contents/' + this.state.content.contentID, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': token
+            }
+        })
+        .then((response) => (response.json()))
+        .then((info) => {
+            console.log(info);
+            const newState = this.state;
+            newState.openDelete = true;
+            this.setState(newState);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    }
+
     FetchData() {
         const { contentID } = this.props.match.params;
         fetch(url + '/contents/'+contentID, {
@@ -208,9 +242,63 @@ export class Status extends React.Component {
         .then((response) => (response.json()))
         .then((info) => {
             console.log(info);
-            this.setState({
-                content: info
-            })
+            const newState = this.state;
+            newState.content = info;
+            this.setState(newState);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+        
+        const token = window.localStorage['token'];
+        fetch(url + '/user', {
+            method: 'GET',
+            headers: {
+                'Authorization': token
+            }
+        })
+        .then((response) => (response.json()))
+        .then((info) => {
+            console.log(info);
+            const newState = this.state;
+            newState.authUser = info;
+            this.setState(newState);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    }
+    
+    RefreshData(contentID) {
+        console.log('Receive ID');
+        console.log(contentID);
+        fetch(url + '/contents/'+contentID, {
+            method: 'GET',
+        })
+        .then((response) => (response.json()))
+        .then((info) => {
+            console.log(info);
+            const newState = this.state;
+            newState.content = info;
+            this.setState(newState);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+        
+        const token = window.localStorage['token'];
+        fetch(url + '/user', {
+            method: 'GET',
+            headers: {
+                'Authorization': token
+            }
+        })
+        .then((response) => (response.json()))
+        .then((info) => {
+            console.log(info);
+            const newState = this.state;
+            newState.authUser = info;
+            this.setState(newState);
         })
         .catch((error) => {
             console.log(error);
@@ -218,10 +306,41 @@ export class Status extends React.Component {
     }
     
     render() {
+        console.log('ReRender');
         if(this.state.content!=null) {
+            let DeleteButton;
+            if(this.state.authUser==null){
+                DeleteButton = <div>loading</div>
+            }
+            else{
+                if(this.state.authUser.username==this.state.content.author.username){
+                    DeleteButton = <div className='DeleteButton'><button onClick={() => {this.handleDelete()}}>Delete</button></div>
+                }
+                else{
+                    DeleteButton = <div></div>
+                }
+            }
             return (
+              <div className='RightPart'>
+              <div>Status</div>
+              <div className='Status'>
+                <MedUser data={this.state.content.author} />
+                <div>Text:<br/>{this.state.content.text}</div>
+                <StatusImages data={this.state.content.images} />
+                {DeleteButton}
+                <Modal isOpen={this.state.openDelete}>
+                  <div>Delete Succeed</div>
+                  <button onClick={() => {
+                      const newState = this.state;
+                      newState.openDelete = false;
+                      window.location.replace('/');
+                  }}>
+                    close
+                  </button>
+                </Modal>
+              </div>
               <div>
-                <Content data={this.state.content} />
+                <div>Comments</div>
                 <button onClick={() => {this.handleOpenModal()}}>
                   Post Comment
                 </button>
@@ -229,8 +348,8 @@ export class Status extends React.Component {
                   <PostComment data={this.state.content.contentID}/>
                   <button onClick={() => {this.handleCloseModal()}}>Close</button>
                 </Modal>
-                <div>Comments</div>
-                <Comments data={this.state.content.contentID} />
+                <Comments data={this.state.content.contentID}/>
+              </div>
               </div>
             );
         }
@@ -272,8 +391,7 @@ export class Content extends React.Component {
         return (
             <div className='Content' onClick={() => {this.handleClick()}}>
               <div><SmallUser data={this.props.data.author} /></div>
-              <div>title: {this.props.data.title} </div>
-              <div>text: {this.props.data.text} </div>
+              <div>{this.props.data.text} </div>
               <br></br>
               <ImageBlock data={this.props.data.images} />
             </div>
