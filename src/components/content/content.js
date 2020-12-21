@@ -404,9 +404,6 @@ export class Status extends React.Component {
                 }
             }
 
-            console.log("wabiwabi");
-            console.log(LikeButton);
-            console.log(DislikeButton);
             return (
               <div className='RightPart'>
               <div>Status</div>
