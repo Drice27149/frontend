@@ -19,7 +19,7 @@ export class PostComment extends React.Component {
     
     handleSubmit() {
         const token = window.localStorage['token'];
-        if(token != undefined && token != null) {
+        if(token !== undefined && token !== null) {
             fetch(url + '/comments', {
                 method: 'POST',
                 headers: {
@@ -175,7 +175,7 @@ export class Comment extends React.Component{
             DeleteButton = <div>loading</div>
         }
         else{
-            if(this.state.authUser.username==this.props.data.creator.username){
+            if(this.state.authUser.username===this.props.data.creator.username){
                 DeleteButton = <button className='DeleteButton' onClick={() => {
                     this.handleDelete();
                 }}>

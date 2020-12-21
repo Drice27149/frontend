@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {LargeUser, MedUser, SmallUser} from '../user/user.js';
+import {MedUser, SmallUser} from '../user/user.js';
 import { Comments, PostComment } from '../comment/comment.js';
 import Modal from 'react-modal';
 
@@ -13,7 +13,7 @@ import { url } from '../../app.js';
 // data: [url]
 class PreviewImages extends React.Component {
     render() {
-        const imagelist = this.props.data.map((url) => <img className='Preview' src={url} />)
+        const imagelist = this.props.data.map((url) => <img className='Preview' alt='' src={url} />)
         return (
           <div className='PreviewImages'>
             Preview Images
@@ -163,7 +163,7 @@ export class UserContents extends React.Component {
 // data: [(short)url]
 export class ImageBlock extends React.Component {
     render() {
-        const imagelist = this.props.data.map((imgurl, key) => <img src={url+'/'+imgurl} key={key} />);
+        const imagelist = this.props.data.map((imgurl, key) => <img src={url+'/'+imgurl} alt='' key={key} />);
         return (
           <div className='ImageBlock'>
             {imagelist}
@@ -195,9 +195,10 @@ export class Status extends React.Component {
             content: null,
             openModal: false,
             openDelete: false,
+            like: false,
         };
         
-        if(this.props.data==undefined || this.props.data==null) {
+        if(this.props.data===undefined || this.props.data===null) {
             this.FetchData();
         }
     }
@@ -234,6 +235,46 @@ export class Status extends React.Component {
         });
     }
 
+    handleLike() {
+        const token = window.localStorage['token'];
+        fetch(url + '/contents/' + this.state.content.contentID + '/like', {
+            method: 'PUT',
+            headers: {
+                'Authorization': token
+            }
+        })
+        .then((response) => (response.json()))
+        .then((info) => {
+            console.log(info);
+            const newState = this.state;
+            newState.like = true;
+            this.setState(newState);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    }
+
+    handleDisLike() {
+        const token = window.localStorage['token'];
+        fetch(url + '/contents/' + this.state.content.contentID + '/like', {
+            method: 'DELETE',
+            headers: {
+                'Authorization': token
+            }
+        })
+        .then((response) => (response.json()))
+        .then((info) => {
+            console.log(info);
+            const newState = this.state;
+            newState.like = false;
+            this.setState(newState);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    }
+
     FetchData() {
         const { contentID } = this.props.match.params;
         fetch(url + '/contents/'+contentID, {
@@ -249,8 +290,24 @@ export class Status extends React.Component {
         .catch((error) => {
             console.log(error);
         });
-        
+
         const token = window.localStorage['token'];
+
+        fetch(url + '/contents/' + contentID + '/like', {
+            method: 'GET',
+            headers: {
+                'Authorization': token
+            }
+        })
+        .then((response) => (response.json()))
+        .then((info) => {
+            console.log(info);
+            const newState = this.state;
+            newState.like = info.liked;
+            this.setState(newState);
+        })
+        
+        
         fetch(url + '/user', {
             method: 'GET',
             headers: {
@@ -285,8 +342,23 @@ export class Status extends React.Component {
         .catch((error) => {
             console.log(error);
         });
-        
+
         const token = window.localStorage['token'];
+
+        fetch(url + '/contents/' + contentID + '/like', {
+            method: 'GET',
+            headers: {
+                'Authorization': token
+            }
+        })
+        .then((response) => (response.json()))
+        .then((info) => {
+            console.log(info);
+            const newState = this.state;
+            newState.like = info.liked;
+            this.setState(newState);
+        })
+        
         fetch(url + '/user', {
             method: 'GET',
             headers: {
@@ -308,18 +380,33 @@ export class Status extends React.Component {
     render() {
         console.log('ReRender');
         if(this.state.content!=null) {
+            let LikeButton;
+            let DislikeButton;
             let DeleteButton;
             if(this.state.authUser==null){
                 DeleteButton = <div>loading</div>
             }
             else{
-                if(this.state.authUser.username==this.state.content.author.username){
+                if(this.state.like === true){
+                    DislikeButton = <div className='DislikeButton'><button onClick={() => {this.handleDisLike()}}>DisLike</button></div>;
+                    LikeButton = <div></div>
+                }
+                else{
+                    LikeButton = <div className='LikeButton'><button onClick={() => {this.handleLike()}}>Like</button></div>;
+                    DislikeButton = <div></div>;
+                }
+
+                if(this.state.authUser.username===this.state.content.author.username){
                     DeleteButton = <div className='DeleteButton'><button onClick={() => {this.handleDelete()}}>Delete</button></div>
                 }
                 else{
                     DeleteButton = <div></div>
                 }
             }
+
+            console.log("wabiwabi");
+            console.log(LikeButton);
+            console.log(DislikeButton);
             return (
               <div className='RightPart'>
               <div>Status</div>
@@ -338,6 +425,11 @@ export class Status extends React.Component {
                     close
                   </button>
                 </Modal>
+                {LikeButton}{DislikeButton}
+                {
+                  this.state.like ?
+                  <div>You've liked this content</div> : null
+                }
               </div>
               <div>
                 <div>Comments</div>
@@ -377,11 +469,7 @@ export class Contents extends React.Component {
 }
 
 // data: content
-export class Content extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-    
+export class Content extends React.Component {    
     handleClick() {
         const statusurl = '/status/'+this.props.data.contentID;
         window.location.replace(statusurl);
