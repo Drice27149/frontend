@@ -2,9 +2,7 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link,
-  useParams
+  Route
 } from "react-router-dom";
 import Modal from 'react-modal';
 
@@ -80,7 +78,7 @@ export class Profile extends React.Component {
     render() {
         if(this.state.user!=null && this.state.authUser!=null){
             let EditProfileButton;
-            if(this.state.user.username == this.state.authUser.username){
+            if(this.state.user.username === this.state.authUser.username){
                 EditProfileButton = <button onClick={() => {this.handleOpenModal()}}>Edit Profile</button>
             }
             else{
@@ -202,7 +200,7 @@ class EditProfile extends React.Component {
                 this.handleSubmit()
             }}>
             <label>
-              <img src={this.state.avatar} />
+              <img src={this.state.avatar} alt=''/>
               <div>
                 change avatar
                 <input type="file" onChange={(event) => this.handleAvatarChange(event)} />

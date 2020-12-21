@@ -28,8 +28,8 @@ export class LargeUser extends React.Component {
             console.log('hey');
             console.log(info);
             const result = info.status;
-            if(result!=undefined){
-                if(info.status=='Mutually following' || info.status=='following'){
+            if(result!==undefined){
+                if(info.status==='Mutually following' || info.status==='following'){
                     this.setState({
                         user: this.state.user,
                         following: true

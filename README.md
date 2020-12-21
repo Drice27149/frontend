@@ -9,6 +9,7 @@
     ```shell
     > npm i
     ```
+    ps.　若安装失败，先将package-lock.json和node_modules文件夹删除后重新执行安装命令
 
 *  运行
 
