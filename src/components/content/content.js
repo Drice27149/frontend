@@ -3,6 +3,7 @@ import React from 'react';
 import {MedUser, SmallUser} from '../user/user.js';
 import { Comments, PostComment } from '../comment/comment.js';
 import Modal from 'react-modal';
+import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
 
 import './content.css';
 import '../../css/app.css'
@@ -388,16 +389,16 @@ export class Status extends React.Component {
             }
             else{
                 if(this.state.like === true){
-                    DislikeButton = <div className='DislikeButton'><button onClick={() => {this.handleDisLike()}}>DisLike</button></div>;
+                    DislikeButton = <div className='DislikeButton'><DefaultButton onClick={() => {this.handleDisLike()}}>DisLike</DefaultButton></div>;
                     LikeButton = <div></div>
                 }
                 else{
-                    LikeButton = <div className='LikeButton'><button onClick={() => {this.handleLike()}}>Like</button></div>;
+                    LikeButton = <div className='LikeButton'><DefaultButton onClick={() => {this.handleLike()}}>Like</DefaultButton></div>;
                     DislikeButton = <div></div>;
                 }
 
                 if(this.state.authUser.username===this.state.content.author.username){
-                    DeleteButton = <div className='DeleteButton'><button onClick={() => {this.handleDelete()}}>Delete</button></div>
+                    DeleteButton = <div className='DeleteButton'><DefaultButton onClick={() => {this.handleDelete()}}>Delete</DefaultButton></div>
                 }
                 else{
                     DeleteButton = <div></div>
@@ -414,13 +415,13 @@ export class Status extends React.Component {
                 {DeleteButton}
                 <Modal isOpen={this.state.openDelete}>
                   <div>Delete Succeed</div>
-                  <button onClick={() => {
+                  <DefaultButton onClick={() => {
                       const newState = this.state;
                       newState.openDelete = false;
                       window.location.replace('/');
                   }}>
                     close
-                  </button>
+                  </DefaultButton>
                 </Modal>
                 {LikeButton}{DislikeButton}
                 {
@@ -430,12 +431,12 @@ export class Status extends React.Component {
               </div>
               <div>
                 <div>Comments</div>
-                <button onClick={() => {this.handleOpenModal()}}>
+                <DefaultButton onClick={() => {this.handleOpenModal()}}>
                   Post Comment
-                </button>
+                </DefaultButton>
                 <Modal isOpen={this.state.openModal}>
                   <PostComment data={this.state.content.contentID}/>
-                  <button onClick={() => {this.handleCloseModal()}}>Close</button>
+                  <DefaultButton onClick={() => {this.handleCloseModal()}}>Close</DefaultButton>
                 </Modal>
                 <Comments data={this.state.content.contentID}/>
               </div>

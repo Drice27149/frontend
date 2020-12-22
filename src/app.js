@@ -8,6 +8,8 @@ import {
 import { Home } from './home.js';
 import { Profile } from './profile.js';
 import { Status } from './components/content/content.js';
+import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
+import { Container, Row, Col } from 'reactstrap';
 
 import './css/app.css';
 
@@ -59,8 +61,8 @@ export class App extends React.Component {
             return (
                 <Router>
                   <div className='SideBar'>
-                    <div onClick={() => {this.handleClickHome()}}>Home</div>
-                    <div onClick={() => {this.handleClickProfile()}}>Profile</div>
+                    <DefaultButton className="Button" onClick={() => {this.handleClickHome()}}>Home</DefaultButton>
+                    <DefaultButton className="Button" onClick={() => {this.handleClickProfile()}}>Profile</DefaultButton>
                   </div>
                   <div className='DashBoard'>
                     <Switch>
@@ -76,12 +78,22 @@ export class App extends React.Component {
         }
         else{
             return (
-                <div>
-                  Please login
-                  <button onClick={() => {window.location.replace('/login')}}>
-                    Login
-                  </button>
-                </div>
+                <Container className="tips-content">
+                	<Row>
+                		<Col md={{size:4, offset:4}}>
+                			<div className="tips-title">
+                				Please Login
+                			</div>
+                		</Col>
+                	</Row>
+                	<Row>
+                		<Col md={{size:4, offset:4}}>
+                			<div>
+                				<DefaultButton className="tips-button" text="login" onClick={() => {window.location.replace('/login')}} />
+                			</div>
+                		</Col>
+                	</Row>
+                </Container>
             )
         }
     }

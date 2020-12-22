@@ -6,3 +6,17 @@
 .PostContent {
   margin: 1%;
 }
+
+.PostButton{
+	margin-left: 50px;
+	
+	border-radius: 5px;
+	background-color: lightblue;
+
+}
+
+.logoutButton{
+	
+	border-radius: 5px;
+	background-color: lightcoral;
+}

@@ -11,6 +11,14 @@
     ```
     ps.　若安装失败，先将package-lock.json和node_modules文件夹删除后重新执行安装命令
 
+    或者手动安装
+    ```
+    npm install --save reactstrap react react-dom
+    npm i office-ui-fabric-react
+    npm install --save react-modal
+    npm install --save react-router-dom
+    ```
+
 *  运行
 
     ```shell
@@ -19,7 +27,7 @@
 
 * 等待编译完成后, 访问```localhost:3000/login```, 看到登录页面表示运行成功。
 
-    ![QQ截图20201221135601.png](https://i.loli.net/2020/12/21/Nfl9pEz8GiAbHVQ.png)
+    ![1](img/1.png)
 
 * 可浏览的网址如下:
 
