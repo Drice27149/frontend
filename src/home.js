@@ -5,6 +5,7 @@ import './css/home.css';
 
 import { url } from './app.js';
 import { PostContent, Contents } from './components/content/content.js';
+import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
 
 export class Home extends React.Component {
     constructor(props) {
@@ -35,16 +36,16 @@ export class Home extends React.Component {
     render() {
         return (
           <div>
-            <button onClick={() => this.handleOpenModal()}>Post Content</button>
+            <DefaultButton className="PostButton" onClick={() => this.handleOpenModal()}>Post Content</DefaultButton>
             <Modal isOpen={this.state.openModal} ariaHideApp={false}>
               <PostContent />
-              <button onClick={() => {this.handleCloseModal()}}>
+              <DefaultButton onClick={() => {this.handleCloseModal()}}>
                 Close
-              </button>
+              </DefaultButton>
             </Modal>
-            <button onClick={() => {this.handleLogOut()}}>
+            <DefaultButton className="logoutButton" onClick={() => {this.handleLogOut()}}>
                 logout
-            </button>
+            </DefaultButton>
             <PublicContents />
           </div>
         );

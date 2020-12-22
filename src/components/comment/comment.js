@@ -2,6 +2,7 @@ import React from 'react';
 
 import { SmallUser } from '../user/user.js';
 import Modal from 'react-modal';
+import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
 
 import './comment.css'
 
@@ -176,11 +177,11 @@ export class Comment extends React.Component{
         }
         else{
             if(this.state.authUser.username===this.props.data.creator.username){
-                DeleteButton = <button className='DeleteButton' onClick={() => {
+                DeleteButton = <DefaultButton className='DeleteButton' onClick={() => {
                     this.handleDelete();
                 }}>
                   Delete
-                </button>
+                </DefaultButton>
             }
             else{
                 DeleteButton = <div></div>
@@ -195,14 +196,14 @@ export class Comment extends React.Component{
               <div>
                 Delete Succeed
               </div>
-              <button onClick={() => {
+              <DefaultButton onClick={() => {
                   this.props.UpdateParent();
                   const newState = this.state;
                   newState.openModal = false;
                   this.setState(newState);
               }}>
                 close
-              </button>
+              </DefaultButton>
             </Modal>
           </div>
         );

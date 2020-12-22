@@ -5,6 +5,8 @@
   margin-left: 2%;
   margin-top: 3%;
   padding: 1%;
+  
+  border-radius: 5px;
 }
 
 .ImageBlock img{
@@ -26,4 +28,9 @@
 
 .RightPart {
   margin: 1%;
+}
+
+
+.pbutton{
+	margin-left: 6px;
 }

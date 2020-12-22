@@ -4,10 +4,14 @@
   border-width: 1px;
   margin: 0.8%;
   padding: 0.1%;
+  
+  border-radius: 5px;
 }
 
 .CommentList{
   margin-left: 3%;
   margin-top: 2%;
+  
+  border-radius: 5px;
 }
 
